@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'second_page.dart';
 
+enum Gender { Male, Female }
+Gender gender;
+
 class FirstPage extends StatefulWidget {
   @override
   _FirstPageState createState() => _FirstPageState();
 }
 
 class _FirstPageState extends State<FirstPage> {
+  double result;
   int height = 170;
   int age = 25;
   int weight = 60;
@@ -26,49 +30,65 @@ class _FirstPageState extends State<FirstPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                height: 150,
-                width: 150,
-                margin: EdgeInsets.only(top: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.mars,
-                      size: 50,
-                    ),
-                    Text(
-                      'Male',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ],
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    gender = Gender.Male;
+                  });
+                },
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  margin: EdgeInsets.only(top: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.mars,
+                        size: 50,
+                      ),
+                      Text(
+                        'Male',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                      color: gender == Gender.Male ? Colors.blue : Colors.grey,
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 ),
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
               ),
-              Container(
-                height: 150,
-                width: 150,
-                margin: EdgeInsets.only(top: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.venus,
-                      size: 50,
-                    ),
-                    Text(
-                      'Female',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ],
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    gender = Gender.Female;
+                  });
+                },
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  margin: EdgeInsets.only(top: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.venus,
+                        size: 50,
+                      ),
+                      Text(
+                        'Female',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                      color: gender == Gender.Female
+                          ? Colors.pink[300]
+                          : Colors.grey,
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 ),
-                decoration: BoxDecoration(
-                    color: Colors.pink[300],
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
               )
             ],
           ),
@@ -175,7 +195,7 @@ class _FirstPageState extends State<FirstPage> {
                   ],
                 ),
                 decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Colors.red[100],
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),
               ),
               Container(
@@ -235,15 +255,22 @@ class _FirstPageState extends State<FirstPage> {
                   ],
                 ),
                 decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Colors.red[100],
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),
               )
             ],
           ),
           RaisedButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SecondPage()));
+              result = (weight / (height * height)) * 10000;
+              print('result');
+              print(result);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SecondPage(
+                            bmiResult: result,
+                          )));
             },
             padding: EdgeInsets.symmetric(horizontal: 100.0, vertical: 10),
             color: Colors.red,

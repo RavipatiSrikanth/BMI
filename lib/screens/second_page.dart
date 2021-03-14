@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SecondPage extends StatelessWidget {
+  final double bmiResult;
+
+  const SecondPage({Key key, this.bmiResult}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,8 +23,9 @@ class SecondPage extends StatelessWidget {
               ),
             ),
             Text(
-              '25.0',
-              style: TextStyle(fontSize: 70, fontWeight: FontWeight.bold),
+              bmiResult.toString(),
+              style: TextStyle(
+                  fontSize: 40, fontWeight: FontWeight.bold, color: Colors.red),
             ),
             Text(
               'Healthy BMI range: 18.5 kg/m2 - 25 kg/m2',
