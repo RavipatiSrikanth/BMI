@@ -23,7 +23,7 @@ class SecondPage extends StatelessWidget {
               ),
             ),
             Text(
-              bmiResult.toString(),
+              bmiResult.toStringAsFixed(1) + ' kg/m2',
               style: TextStyle(
                   fontSize: 40, fontWeight: FontWeight.bold, color: Colors.red),
             ),
